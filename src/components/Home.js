@@ -4,6 +4,7 @@ import axios from "axios";
 
 import SearchBar from "./SearchBar";
 import PhotoGallery from "./PhotoGallery";
+import CreatePostButton from "./CreatePostButton";
 import { SEARCH_KEY, BASE_URL, TOKEN_KEY } from "../constants";
 
 const { TabPane } = Tabs;
@@ -79,12 +80,33 @@ function Home(props) {
 
       return <PhotoGallery images={imageArr} />;
     } else if (type === "video") {
-      console.log("video -> ", posts);
-      return "videos";
+      return (
+        <Row gutter={32}>
+          {posts
+            .filter((post) => post.type === "video")
+            .map((post) => (
+              <Col span={8} key={post.url}>
+                <video src={post.url} controls={true} className="video-block" />
+                <p>
+                  {post.user}: {post.message}
+                </p>
+              </Col>
+            ))}
+        </Row>
+      );
     }
   };
 
-  const operations = <Button>Upload</Button>;
+  const showPost = (type) => {
+    console.log("type -> ", type);
+    setActiveTab(type);
+
+    setTimeout(() => {
+      setSearchOption({ type: SEARCH_KEY.all, keyword: "" });
+    }, 3000);
+  };
+
+  const operations = <CreatePostButton onShowPost={showPost} />;
   return (
     <div className="home">
       <SearchBar handleSearch={handleSearch} />
