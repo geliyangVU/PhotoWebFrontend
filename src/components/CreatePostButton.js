@@ -3,6 +3,7 @@ import { Modal, Button, message } from "antd";
 import axios from "axios";
 
 import { BASE_URL, TOKEN_KEY } from "../constants";
+import { PostForm } from "./PostForm";
 
 class CreatePostButton extends Component {
   state = {
@@ -86,7 +87,7 @@ class CreatePostButton extends Component {
           confirmLoading={confirmLoading}
           onCancel={this.handleCancel}
         >
-          post form
+          <PostForm ref={(refInstance) => (this.postForm = refInstance)} />
         </Modal>
       </div>
     );
