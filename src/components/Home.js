@@ -16,6 +16,11 @@ function Home(props) {
     keyword: "",
   });
 
+  const handleSearch = (option) => {
+    const { type, keyword } = option;
+    setSearchOption({ type: type, keyword: keyword });
+  };
+
   useEffect(() => {
     const { type, keyword } = searchOption;
     fetchPost(searchOption);
@@ -62,6 +67,7 @@ function Home(props) {
         .filter((item) => item.type === "image")
         .map((image) => {
           return {
+            postId: image.id,
             src: image.url,
             user: image.user,
             caption: image.message,
@@ -81,7 +87,7 @@ function Home(props) {
   const operations = <Button>Upload</Button>;
   return (
     <div className="home">
-      <SearchBar />
+      <SearchBar handleSearch={handleSearch} />
       <div className="display">
         <Tabs
           onChange={(key) => setActiveTab(key)}
