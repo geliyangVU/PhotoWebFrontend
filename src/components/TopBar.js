@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../assets/images/logo.svg";
+import logo from "../assets/images/icon.png";
 
 import { LogoutOutlined } from "@ant-design/icons";
 
@@ -8,7 +8,7 @@ function TopBar(props) {
   return (
     <header className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
-      <span className="App-title">Around Web</span>
+      <span className="App-title">Photo and Video Search</span>
       {isLoggedIn ? (
         <LogoutOutlined className="logout" onClick={handleLogout} />
       ) : null}
